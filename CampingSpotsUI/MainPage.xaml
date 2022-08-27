@@ -1,0 +1,117 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CampingSpotsUI.MainPage"
+             xmlns:sfControl="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             BackgroundColor="{DynamicResource SecondaryColor}">
+     <ScrollView VerticalScrollBarVisibility="Never">
+       <Grid RowDefinitions="Auto,Auto,*,Auto">
+             <!-- Step 1: Main picture-->
+            <Image Grid.Row="0" Grid.Column="0" Source="forest" HeightRequest="360" Aspect="AspectFill" Margin="0,-50,0,0"/>
+
+            <!-- Step 2: Day information-->
+            <Frame Grid.Row="1" BackgroundColor="#5cb26e" CornerRadius="40" HasShadow="False" HeightRequest="160" Margin="0,-40,0,0">
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto,Auto"  Padding="10">
+                     <!--Day-->
+                    <Label Grid.Row="0" Grid.Column="0" Text="Saturday" TextColor="White" FontSize="22"/>
+                     <!--Time-->
+                    <Label Grid.Row="1" Grid.Column="0" Text="November 29, 2021" TextColor="White" FontSize="19"/>
+                      <!--Weather button-->
+                    <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" ImageSource="sun" HeightRequest="50" WidthRequest="50" CornerRadius="25" BackgroundColor="White"/>
+                      <!--Weather description-->
+                    <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Text="22°" FontAttributes="Bold" FontSize="40" TextColor="White" Padding="10,0,0,0"/>
+                </Grid>
+            </Frame>
+            <!-- Step 3: Camping information-->
+            <Frame Grid.Row="2" VerticalOptions="FillAndExpand" HasShadow="False" CornerRadius="40" BackgroundColor="#f3efec" Margin="0,-60,0,0">
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" Padding="20" VerticalOptions="FillAndExpand">
+                     <!--Title & overall button-->
+                    <Label Grid.Row="0" Grid.Column="0" Text="Camp di Tebing&#10;Terjal, Sukabumi" TextColor="Black" FontSize="19" FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    <Button Grid.Row="0" Grid.Column="1" BackgroundColor="#ff884a" TextColor="White" Text="Overall 4.0" WidthRequest="98" HeightRequest="70" HorizontalOptions="End" CornerRadius="20" VerticalOptions="Center"/>
+                     <!--Location card-->
+                    <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HasShadow="False" CornerRadius="20" HorizontalOptions="FillAndExpand" HeightRequest="105" Margin="0,20,0,35">
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                             <!--Avatar-->
+                            <sfControl:SfAvatarView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="0,0,20,0"
+                                ContentType="Default"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                BackgroundColor="#ff884a"
+                                BorderColor="Transparent"
+                                WidthRequest="60"
+                                HeightRequest="60"
+                                CornerRadius="30"/>
+
+                            <!--Km information-->
+                            <Label Grid.Row="0" Grid.Column="1" TextColor="Black">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="20.6 " FontAttributes="Bold" FontSize="22"/>
+                                        <Span Text="km" FontSize="19"/>
+                                   </FormattedString>
+                                </Label.FormattedText>
+                             </Label>
+                             <!--Location-->
+                            <Label Grid.Row="1" Grid.Column="1" Text="Banten, Sukabumi" TextColor="#938e8f"/>
+                             <!--Arrow icon-->
+                            <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Source="arrow"/>
+                        </Grid>
+                    </Frame>
+                    <!-- People information-->
+                    <Label Grid.Row="2" Text="80 People" TextColor="Black" FontAttributes="Bold" FontSize="19"/>
+                    <Label Grid.Row="3" Text="Joined camp" TextColor="#938e8f" FontSize="17"/>
+
+                     <!--Avatar collections--> 
+                      <syncfusion:SfListView x:Name="listView" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1"
+                        ItemsSource="{Binding UserInfo}"
+                        ItemSize="40"
+                        ScrollBarVisibility="Never"
+                        HeightRequest="70"
+                        HorizontalOptions="End"
+                        WidthRequest="165" 
+                        Orientation="Horizontal">
+                            <syncfusion:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand"> 
+                                        <sfControl:SfAvatarView 
+                                            ContentType="Default"
+                                            ImageSource="{Binding UserPicture}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            BorderColor="Transparent"
+                                            WidthRequest="50"
+                                            HeightRequest="50"
+                                            CornerRadius="25"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </syncfusion:SfListView.ItemTemplate>
+                        </syncfusion:SfListView>
+                </Grid>
+            </Frame>
+             <!--Step 4: Pricing-->
+            <Grid Grid.Row="3" RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" HeightRequest="80" BackgroundColor="White" Margin="0,-15,0,20" Padding="30" VerticalOptions="CenterAndExpand">
+                 <!--Title-->
+                <Label Grid.Row="0" Grid.Column="0" Text="Total Price" TextColor="#4a3c3d" FontSize="16"/>
+                 <!--Price-->
+                <Label Grid.Row="1" Grid.Column="0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="$ " TextColor="#ff884a" FontSize="17"/>
+                            <Span Text="20.00 " FontSize="26" TextColor="#4a3c3d" FontAttributes="Bold"/>
+                            <Span Text="per day" TextColor="#ff884a" FontSize="17"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                 <!--Book price Button-->
+                <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Text="Book Place >" TextColor="White"  CornerRadius="10" HeightRequest="55" FontSize="17" WidthRequest="140" BackgroundColor="#5cb26e">
+                     <Button.Shadow>
+                           <Shadow Brush="Black"
+                                   Offset="5,5"
+                                   Radius="10"
+                                   Opacity="0.4"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid> 
+        </Grid>
+      </ScrollView>   
+</ContentPage>
